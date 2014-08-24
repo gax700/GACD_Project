@@ -25,17 +25,35 @@ To run the script, source `run_analysis.R`. Be careful to have "UCI HAR Dataset"
 
 ## Process
 
-1. For both the test and train datasets, produce an interim dataset:
-    1. Extract the mean and standard deviation features (listed in CodeBook.md, section 'Extracted Features'). This is the `values` table.
-    2. Get the list of activities.
-    3. Put the activity *labels* (not numbers) into the `values` table.
-    4. Get the list of subjects.
-    5. Put the subject IDs into the `values` table.
-2. Join the test and train interim datasets.
-3. Put each variable on its own row.
-4. Rejoin the entire table, keying on subject/acitivity pairs, applying the mean function to each vector of values in each subject/activity pair. This is the clean dataset.
-5. Write the clean dataset to disk.
+1. Merges the training and the test sets to create one data set.
+    1. Load X_Train data
+    2. Load Y_Train data
+    3. Load Subject_train data
+    4. Merge the above datasets
+	
+	5. Load X_Test data
+    6. Load Y_Test data
+    7. Load Subject_test data
+    8. Merge the above datasets
+	
+	9. Merge Train and Test data to produce first intermediate dataset (TAT_data_s1)
+
+2. Extracts only the measurements on the mean and standard deviation for each measurement
+	1. Read features dataset
+	2. Make some cleaning on names
+	3. Select only needed features (Mean and Std)
+	4. Produce second intermediate dataset (TAT_data_s2)
+	
+3. Uses descriptive activity names to name the activities in the data set
+	1. Add activity labels and produce third intermediate dataset (TAT_data_s3)
+	
+4. Appropriately labels the data set with descriptive activity names
+	1. Labels data and produce fourth intermediate dataset (TAT_data_s4)
+
+5. Creates a tidy data set with the average of each variable for each activity and each subject.
+	1. Makes aggregations based on subject and activity (TAT_data_s5)
+	2. Write the clean dataset to disk (TidyDataSet.txt)
 
 ## Cleaned Data
 
-The resulting clean dataset is in this repository at: `data/cleaned.txt`. It contains one row for each subject/activity pair and columns for subject, activity, and each feature that was a mean or standard deviation from the original dataset.
+The resulting clean dataset is in this repository at: `TidyDataSet.txt`. It contains one row for each subject/activity pair and columns for subject, activity, and each feature that was a mean or standard deviation from the original dataset.
